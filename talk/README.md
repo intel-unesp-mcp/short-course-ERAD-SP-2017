@@ -4,13 +4,15 @@
   * mmic
   * ssh 
   * micnativeloadex
+  
 * Knl
   * numastat -h
   * selecting memory system
+  * numastat -m
+  
+* OpenMP samples
 
-* openmp sample
-
-* advisor
+* Advisor
 
   * Transposição de matrizes ("Multithreaded Transposition of Square Matrices with Common Code for Intel Xeon Processors and Intel Xeon Phi Coprocessors" - http://research.colfaxinternational.com/post/2013/08/12/Trans-7110.aspx)
 
@@ -28,9 +30,9 @@ make clean
 make runme-CPU
 ```
 
-* syncronization
+* Syncronization
   * tachyon
 
-* offload
+* Offload
   * offload sample
   * offload example
