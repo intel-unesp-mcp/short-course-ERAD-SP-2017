@@ -1,36 +1,36 @@
-Xeon and Xeon Phi
-  icc
-  vectorization option
-  mmic
-  ssh 
-  micnativeloadex
-Knl
-  numastat -h
-  selecting memory system
+* Xeon and Xeon Phi
+  * icc
+  * vectorization option
+  * mmic
+  * ssh 
+  * micnativeloadex
+* Knl
+  * numastat -h
+  * selecting memory system
 
-openmp sample
+* openmp sample
 
-advisor
+* advisor
 
-Transposição de matrizes ("Multithreaded Transposition of Square Matrices with Common Code for Intel Xeon Processors and Intel Xeon Phi Coprocessors" - http://research.colfaxinternational.com/post/2013/08/12/Trans-7110.aspx)
+  * Transposição de matrizes ("Multithreaded Transposition of Square Matrices with Common Code for Intel Xeon Processors and Intel Xeon Phi Coprocessors" - http://research.colfaxinternational.com/post/2013/08/12/Trans-7110.aspx)
 
-compilar para Xeon
-
-```
-make clean
-make runme-CPU
-```
-
-compilar para Xeon Phi
+* compilar para Xeon
 
 ```
 make clean
 make runme-CPU
 ```
 
-syncronization
-tachyon
+* compilar para Xeon Phi
 
-offload
-offload sample
-offload example
+```
+make clean
+make runme-CPU
+```
+
+* syncronization
+  * tachyon
+
+* offload
+  * offload sample
+  * offload example
