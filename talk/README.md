@@ -24,7 +24,8 @@ export OFFLOAD_REPORT=2
 ./helloWorldOffload
 ```
 
-* Knl
+# Intel Xeon Phi (KNL)
+
 ```
 lscpu
 ```
@@ -49,9 +50,9 @@ numactl -m 0,1,2,3  - dram
 numactl -m 4,5,6,7  - mcdram
 ```
 
-* OpenMP samples
+# OpenMP samples
 
-# 1. OpenMP Sample Program
+## OpenMP Sample Program
 
 Build the application for Xeon (without OpenMP Option)
 ```
@@ -73,23 +74,23 @@ OMP-hello.c(24): warning #3180: unrecognized OpenMP #pragma
               ^
 ```
 
-Build the application for Xeon
+## Build the application for Xeon
 ```
 icc OMP-hello.c -o OMP-hello -fopenmp
 ```
 
-Build the application for Coprocessor
+## Build the application for Coprocessor
 ```
 icc OMP-hello.c -o OMP-hello.mic -mmic -fopenmp
 ```
 
-Launch the application on Xeon
+## Launch the application on Xeon
 ```
 export OMP_NUM_THREADS=10
 ./OMP-hello
 ```
 
-Results:
+### Results:
 
 ```
 hello from hostname phi02.ncc.unesp.br
@@ -104,13 +105,13 @@ hello from hostname phi02.ncc.unesp.br
 hello from hostname phi02.ncc.unesp.br
 ```
 
-Launch the application on the Coprocessor from host
+## Launch the application on the Coprocessor from host
 ```
 micnativeloadex ./OMP-hello.mic -e "OMP_NUM_THREADS=10 LD_LIBRARY_PATH=/opt/intel/lib/mic/"
 
 ```
 
-Results:
+### Results:
 
 ```
 hello from hostname phi02-mic0.ncc.unesp.br
@@ -126,27 +127,27 @@ hello from hostname phi02-mic0.ncc.unesp.br
 sum of vector elements: 5789.473684
 ```
 
-* Advisor
+# Advisor
 
   * Transposição de matrizes ("Multithreaded Transposition of Square Matrices with Common Code for Intel Xeon Processors and Intel Xeon Phi Coprocessors" - http://research.colfaxinternational.com/post/2013/08/12/Trans-7110.aspx)
 
-* compilar para Xeon
+## compilar para Xeon
 
 ```
 make clean
 make runme-CPU
 ```
 
-* compilar para Xeon Phi
+## compilar para Xeon Phi
 
 ```
 make clean
 make runme-CPU
 ```
 
-* Syncronization
-  * tachyon
+# Syncronization
+## tachyon
 
-* Offload
-  * offload sample
-  * offload example
+# Offload
+## offload sample
+## offload example
