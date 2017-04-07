@@ -142,9 +142,12 @@ sum of vector elements: 5789.473684
       ANNOTATE_SITE_BEGIN( MySite2 );
       for(k=0; k<msize; k++) {
         ANNOTATE_ITERATION_TASK( MyTask2 );
+	ANNOTATE_SITE_BEGIN( MySite3 );
         for(j=0; j<msize; j++) {
+				ANNOTATE_ITERATION_TASK( MyTask3 );
 				c[i][j] = c[i][j] + a[i][k] * b[k][j];
 			}
+			ANNOTATE_SITE_END();
 		}
                 ANNOTATE_SITE_END();
 	} 
