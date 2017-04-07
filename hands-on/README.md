@@ -1,5 +1,5 @@
 Hands-on
-Preparação para desafio HPC 
+# Preparação para desafio HPC 
 
     Escolha um dos seguintes problemas (Harmonic progression sum ou Game of Life).
     
@@ -10,7 +10,8 @@ Preparação para desafio HPC
         Identificar onde está ocorrendo 'race condition';
         Incluir uma diretiva de sincronização no laço, mantendo o desempenho melhor que o da versão serial.
 
-Execução do programa game o life:
+    Avalie o desempenho desses programas no Xeon Phi(KNC) e Xeon Phi(KNL)
+# Execução do programa game o life:
 ```
 cd life
 make
@@ -35,7 +36,7 @@ Caso difícil:
 ./life < judge2.in
 ```
 
-Execução do programa Harmonic Progression Sum:
+# Execução do programa Harmonic Progression Sum:
 ```
 cd sum
 make
