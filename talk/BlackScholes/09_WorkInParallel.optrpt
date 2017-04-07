@@ -1,0 +1,241 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) C Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 17.0.1.132 Build 20161005
+
+Compiler options: -O3 -openmp -xhost -fimf-precision=low -fimf-domain-exclusion=31 -o 09_WorkInParallel -g -qopt-report5
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: true
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main(int, char **)) [1/4=25.0%] 09_WorkInParallel.cpp(68,1)
+  -> EXTERN: (73,5) printf(const char *, ...)
+  -> INLINE (MANUAL): (76,7) atoi(const char *) (isz = 7) (sz = 14)
+    -> EXTERN: /usr/include/stdlib.h:(280,16) strtol(const char *, char **, int)
+  -> EXTERN: (82,23) operator new[](unsigned long)
+  -> (97,15) GetOptionPrice() (isz = 30) (sz = 35)
+     [[ Called routine is noinline  <1>]]
+  -> (103,3) GetOptionPrices(float *, float *, float *, float *) (isz = 97) (sz = 108)
+     [[ Called routine is noinline  <1>]]
+  -> EXTERN: (112,3) operator delete[](void *)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at 09_WorkInParallel.cpp(88,3)
+   remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+   remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation : ( 1 2 ) --> ( 2 1 ) 
+   remark #15382: vectorization support: call to function GetOptionPrices(float *, float *, float *, float *) cannot be vectorized   [ 09_WorkInParallel.cpp(103,3) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between pT[i] (92:5) and pK[i] (94:5)
+   remark #15346: vector dependence: assumed OUTPUT dependence between pK[i] (94:5) and pT[i] (92:5)
+
+   LOOP BEGIN at 09_WorkInParallel.cpp(90,3)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed OUTPUT dependence between pT[i] (92:5) and pK[i] (94:5)
+      remark #15346: vector dependence: assumed OUTPUT dependence between pK[i] (94:5) and pT[i] (92:5)
+      remark #25439: unrolled with remainder by 2  
+   LOOP END
+
+   LOOP BEGIN at 09_WorkInParallel.cpp(90,3)
+   <Remainder>
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+09_WorkInParallel.cpp(68,1):remark #34051: REGISTER ALLOCATION : [main] 09_WorkInParallel.cpp:68
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   15[ rax rdx rcx rbx rsi rdi r8 r12-r15 zmm0-zmm3]
+        
+    Routine temporaries
+        Total         :      70
+            Global    :      25
+            Local     :      45
+        Regenerable   :      19
+        Spilled       :       7
+        
+    Routine stack
+        Variables     :       4 bytes*
+            Reads     :       2 [0.00e+00 ~ 0.0%]
+            Writes    :       2 [0.00e+00 ~ 0.0%]
+        Spills        :      16 bytes*
+            Reads     :       3 [8.64e+01 ~ 4.6%]
+            Writes    :       2 [1.44e+00 ~ 0.1%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: GetOptionPrices(float *, float *, float *, float *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (GetOptionPrices(float *, float *, float *, float *)) [2/4=50.0%] 09_WorkInParallel.cpp(46,1)
+  -> EXTERN: (55,12) invsqrtf(float)
+  -> EXTERN: (56,11) logf(float)
+  -> EXTERN: (57,11) logf(float)
+  -> EXTERN: (58,26) erff(float)
+  -> EXTERN: (59,26) erff(float)
+  -> EXTERN: (60,38) expf(float)
+
+
+    Report from: OpenMP optimizations [openmp]
+
+09_WorkInParallel.cpp(52:1-52:1):OMP:_Z15GetOptionPricesPfS_S_S_:  OpenMP DEFINED LOOP WAS PARALLELIZED
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at 09_WorkInParallel.cpp(52,1)
+<Peeled loop for vectorization>
+   remark #25015: Estimate of max trip count of loop=7
+LOOP END
+
+LOOP BEGIN at 09_WorkInParallel.cpp(52,1)
+   remark #15389: vectorization support: reference pT[i] has unaligned access   [ 09_WorkInParallel.cpp(55,28) ]
+   remark #15389: vectorization support: reference pS0[i] has unaligned access   [ 09_WorkInParallel.cpp(56,16) ]
+   remark #15389: vectorization support: reference pK[i] has unaligned access   [ 09_WorkInParallel.cpp(56,25) ]
+   remark #15389: vectorization support: reference pS0[i] has unaligned access   [ 09_WorkInParallel.cpp(57,16) ]
+   remark #15389: vectorization support: reference pK[i] has unaligned access   [ 09_WorkInParallel.cpp(57,25) ]
+   remark #15389: vectorization support: reference pT[i] has unaligned access   [ 09_WorkInParallel.cpp(56,54) ]
+   remark #15389: vectorization support: reference pT[i] has unaligned access   [ 09_WorkInParallel.cpp(57,54) ]
+   remark #15389: vectorization support: reference pT[i] has unaligned access   [ 09_WorkInParallel.cpp(60,57) ]
+   remark #15389: vectorization support: reference pC[i] has unaligned access   [ 09_WorkInParallel.cpp(60,5) ]
+   remark #15389: vectorization support: reference pS0[i] has unaligned access   [ 09_WorkInParallel.cpp(60,14) ]
+   remark #15389: vectorization support: reference pK[i] has unaligned access   [ 09_WorkInParallel.cpp(60,30) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.047
+   remark #15301: SIMD LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15450: unmasked unaligned unit stride loads: 3 
+   remark #15451: unmasked unaligned unit stride stores: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 770 
+   remark #15477: vector cost: 76.370 
+   remark #15478: estimated potential speedup: 7.380 
+   remark #15482: vectorized math library calls: 6 
+   remark #15486: divides: 4 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at 09_WorkInParallel.cpp(52,1)
+<Remainder loop for vectorization>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+09_WorkInParallel.cpp(46,1):remark #34051: REGISTER ALLOCATION : [_Z15GetOptionPricesPfS_S_S_] 09_WorkInParallel.cpp:46
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   26[ rax rdx rcx rbx rsi rdi r8-r15 zmm0-zmm4 zmm8-zmm14]
+        
+    Routine temporaries
+        Total         :     302
+            Global    :      84
+            Local     :     218
+        Regenerable   :      61
+        Spilled       :      20
+        
+    Routine stack
+        Variables     :      56 bytes*
+            Reads     :       4 [0.00e+00 ~ 0.0%]
+            Writes    :      10 [2.60e+01 ~ 2.5%]
+        Spills        :     296 bytes*
+            Reads     :      47 [9.81e+01 ~ 9.4%]
+            Writes    :      38 [4.77e+01 ~ 4.6%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: GetOptionPrice()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (GetOptionPrice()) [3/4=75.0%] 09_WorkInParallel.cpp(32,1)
+  -> EXTERN: (38,8) cdfnorm(double)
+  -> EXTERN: (39,8) cdfnorm(double)
+
+
+    Report from: Code generation optimizations [cg]
+
+09_WorkInParallel.cpp(32,1):remark #34051: REGISTER ALLOCATION : [_Z14GetOptionPricev] 09_WorkInParallel.cpp:32
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    2[ zmm0-zmm1]
+        
+    Routine temporaries
+        Total         :      19
+            Global    :       9
+            Local     :      10
+        Regenerable   :       4
+        Spilled       :       1
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       8 bytes*
+            Reads     :       1 [1.00e+00 ~ 4.8%]
+            Writes    :       1 [1.00e+00 ~ 4.8%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING FOOTNOTES:
+
+<1> The routine declaration is annotated with "__attribute__((noinline))".  
+    Remove this annotation to permit the compiler to inline this routine.
+
