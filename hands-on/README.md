@@ -34,3 +34,22 @@ Caso difícil:
 ```
 ./life < judge2.in
 ```
+
+Execução do programa Harmonic Progression Sum:
+```
+cd sum
+make
+./sum < <arquivo de entrada>
+```
+exemplos de execução:
+Caso rápido
+```
+./sum < sum.in
+```
+
+Caso demorado
+```
+./sum < sum2.in
+```
+
+
