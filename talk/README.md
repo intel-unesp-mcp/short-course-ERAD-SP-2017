@@ -19,6 +19,7 @@ ssh mic0
 
 ```
 icc helloWorldOffload.c -o helloWorldOffload
+export OFFLOAD_REPORT=2
 ./helloWorldOffload
 ```
 
