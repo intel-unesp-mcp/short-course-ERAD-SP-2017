@@ -159,5 +159,4 @@ sum of vector elements: 5789.473684
 ## tachyon
 
 # Offload
-## offload sample
 ## offload example
