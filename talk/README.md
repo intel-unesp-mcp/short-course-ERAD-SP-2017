@@ -15,7 +15,13 @@ micnativeloadex helloWorld.mic
 ssh mic0 
 ./helloWorld.mic
 ```
-  
+# Offloading to Intel Xeon Phi
+
+```
+icc helloWorldOffload.c -o helloWorldOffload
+./helloWorldOffload
+```
+
 * Knl
 ```
 lscpu
