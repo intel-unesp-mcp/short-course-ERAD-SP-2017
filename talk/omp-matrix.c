@@ -1,51 +1,36 @@
 #include <stdio.h>
 int main(){
-    int r, c, a[100][100], b[100][100], sum[100][100], i, j;
+    int r, c, i, j, *a , *b , *sum;
+    char hn[600];
 
-    printf("Enter number of rows (between 1 and 100): ");
-    scanf("%d", &r);
-    printf("Enter number of columns (between 1 and 100): ");
-    scanf("%d", &c);
+    #pragma omp parallel
+    {
+      gethostname(hn,600);
+      printf("hostname %s\n",hn);
+    }
 
-    printf("\nEnter elements of 1st matrix:\n");
+    r=40000;
+    c=40000;
 
+    a = (int*)malloc(r*c*sizeof(double));
+    b = (int*)malloc(r*c*sizeof(double));
+    sum = (int*)malloc(r*c*sizeof(double));
+
+    #pragma omp parallel for
     for(i=0; i<r; ++i)
-        for(j=0; j<c; ++j)
-        {
-            printf("Enter element a%d%d: ",i+1,j+1);
-            scanf("%d",&a[i][j]);
-        }
+        for(j=0; j<c; ++j) {
+	  a[i*r + j]=i+j;
+          b[i*r + j]=i-j;
+        } 
 
-    printf("Enter elements of 2nd matrix:\n");
-    for(i=0; i<r; ++i)
-        for(j=0; j<c; ++j)
-        {
-            printf("Enter element a%d%d: ",i+1, j+1);
-            scanf("%d", &b[i][j]);
-        }
-
-    // Adding Two matrices
-
+    #pragma omp parallel for
     for(i=0;i<r;++i)
         for(j=0;j<c;++j)
-        {
-            sum[i][j]=a[i][j]+b[i][j];
-        }
+            sum[i*r+j] = a[i*r+j] + b[i*r+j];
 
-    // Displaying the result
-    printf("\nSum of two matrix is: \n\n");
+    free(a);
+    free(b);
+    free(sum);	
 
-    for(i=0;i<r;++i)
-        for(j=0;j<c;++j)
-        {
-
-            printf("%d   ",sum[i][j]);
-
-            if(j==c-1)
-            {
-                printf("\n\n");
-            }
-        }
-    
     return 0;
 }
