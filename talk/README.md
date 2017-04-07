@@ -1,13 +1,13 @@
 # Intel Xeon and Intel Xeon Phi
 
-# Compile and running for Intel Xeon
+## Compile and running for Intel Xeon
 
 ```
 icc helloWorld.c -o helloWorld
 ./helloWorld
 ```
 
-# Compile and running for Intel Xeon Phi
+## Compile and running for Intel Xeon Phi
 
 ```
 icc helloWorld.c -o helloWorld.mic -mmic
@@ -15,7 +15,8 @@ micnativeloadex helloWorld.mic
 ssh mic0 
 ./helloWorld.mic
 ```
-# Offloading to Intel Xeon Phi
+
+## Offloading to Intel Xeon Phi
 
 ```
 icc helloWorldOffload.c -o helloWorldOffload
