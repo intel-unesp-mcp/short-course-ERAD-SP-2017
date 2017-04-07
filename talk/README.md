@@ -56,7 +56,7 @@ numactl -m 4,5,6,7  - mcdram
 
 Build the application for Xeon (without OpenMP Option)
 ```
-icc OMP-hello.c -o OMP-hello
+icc omp-matrix.c -o omp-matrix
 ```
 
 The OpenMP pragmas are ignored by compiler:
@@ -76,18 +76,18 @@ OMP-hello.c(24): warning #3180: unrecognized OpenMP #pragma
 
 ## Build the application for Xeon
 ```
-icc OMP-hello.c -o OMP-hello -fopenmp
+icc omp-matrix.c -o omp-matrix -fopenmp
 ```
 
 ## Build the application for Coprocessor
 ```
-icc OMP-hello.c -o OMP-hello.mic -mmic -fopenmp
+icc omp-matrix.c -o omp-matrix.mic -mmic -fopenmp
 ```
 
 ## Launch the application on Xeon
 ```
 export OMP_NUM_THREADS=10
-./OMP-hello
+./omp-matrix
 ```
 
 ### Results:
@@ -107,7 +107,7 @@ hello from hostname phi02.ncc.unesp.br
 
 ## Launch the application on the Coprocessor from host
 ```
-micnativeloadex ./OMP-hello.mic -e "OMP_NUM_THREADS=10 LD_LIBRARY_PATH=/opt/intel/lib/mic/"
+micnativeloadex ./omp-matrix.mic -e "OMP_NUM_THREADS=10 LD_LIBRARY_PATH=/opt/intel/lib/mic/"
 
 ```
 
