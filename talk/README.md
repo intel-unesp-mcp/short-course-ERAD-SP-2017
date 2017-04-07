@@ -129,21 +129,28 @@ sum of vector elements: 5789.473684
 
 # Advisor
 
-  * Transposição de matrizes ("Multithreaded Transposition of Square Matrices with Common Code for Intel Xeon Processors and Intel Xeon Phi Coprocessors" - http://research.colfaxinternational.com/post/2013/08/12/Trans-7110.aspx)
+  * Matrix Multiplication
+  
+  Code region for advisor
+  ```
+  	int i,j,k;
 
-## compilar para Xeon
-
-```
-make clean
-make runme-CPU
-```
-
-## compilar para Xeon Phi
-
-```
-make clean
-make runme-CPU
-```
+// Basic serial implementation
+    ANNOTATE_SITE_BEGIN( MySite1 );
+    for(i=0; i<msize; i++) {
+      ANNOTATE_ITERATION_TASK( MyTask1 );
+      ANNOTATE_SITE_BEGIN( MySite2 );
+      for(k=0; k<msize; k++) {
+        ANNOTATE_ITERATION_TASK( MyTask2 );
+        for(j=0; j<msize; j++) {
+				c[i][j] = c[i][j] + a[i][k] * b[k][j];
+			}
+		}
+                ANNOTATE_SITE_END();
+	} 
+        ANNOTATE_SITE_END();
+  ```
+ 
 
 # Syncronization
 ## tachyon
