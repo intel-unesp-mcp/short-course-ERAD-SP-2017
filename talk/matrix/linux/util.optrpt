@@ -1,0 +1,17 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) C Intel(R) 64 Compiler for applications running on Intel(R) MIC Architecture, Version 17.0.1.132 Build 20161005
+
+Compiler options: -g -O3 -DUSE_OMP -fopenmp -DICC -debug inline-debug-info -vec-report3 -qopt-report=3 -qopt-report-phase=vec -mmic -c -D_LINUX
+
+Begin optimization report for: getCPUFreq()
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at ../src/util.c(66,7)
+   remark #15521: loop was not vectorized: loop control variable was not identified. Explicitly compute the iteration count before executing the loop or try using canonical loop form from OpenMP specification
+LOOP END
+===========================================================================
