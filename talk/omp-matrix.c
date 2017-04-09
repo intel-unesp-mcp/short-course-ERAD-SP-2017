@@ -12,9 +12,9 @@ int main(){
     r=40000;
     c=40000;
 
-    a = (int*)malloc(r*c*sizeof(double));
-    b = (int*)malloc(r*c*sizeof(double));
-    sum = (int*)malloc(r*c*sizeof(double));
+    a = (int*)malloc(r*c*sizeof(int));
+    b = (int*)malloc(r*c*sizeof(int));
+    sum = (int*)malloc(r*c*sizeof(int));
 
     #pragma omp parallel for
     for(i=0; i<r; ++i)
