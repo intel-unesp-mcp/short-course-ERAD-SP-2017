@@ -4,8 +4,8 @@ FLAGS=-O3 -g -I/opt/intel/advisor/include/ -xhost #-fopenmp
 
 all: life
 
-life: lifeOMP.c
-	$(CC) $(FLAGS) lifeOMP.c -o lifeOMP
+life: life.c
+	$(CC) $(FLAGS) life.c -o life
 
 clean:
-	rm lifeOMP
+	rm life
